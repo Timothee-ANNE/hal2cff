@@ -3,11 +3,10 @@ import ipywidgets as widgets
 
 # # hal2cff example
 
-
-print(hal2cff("https://hal.archives-ouvertes.fr/hal-01361430v1"))
+adresse = "https://hal.archives-ouvertes.fr/hal-01361430v1"
 
 text_widget = widgets.Text(
-    value='Hello World',
+    value='https://hal.archives-ouvertes.fr/',
     placeholder='Type something',
     description='String:',
     disabled=False
@@ -23,17 +22,21 @@ button = widgets.Button(
     icon='check' # (FontAwesome names without the `fa-` prefix)
 )
 
+out = widgets.Output(layout={'border': '1px solid black'})
+
 
 def display_html(button):
     txt = text_widget.get_state()["value"]
     prefix = "https://hal.archives-ouvertes.fr/"
-    print(txt)
     if txt[:len(prefix)] == prefix:
-        print(hal2cff(txt))
+        with out:
+            print(hal2cff(txt))
 
 
 button.on_click(display_html)
 
 button
+
+out
 
 
